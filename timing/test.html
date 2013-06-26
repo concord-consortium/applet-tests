@@ -1,5 +1,12 @@
 <html><head><title>Test Applet Load Timing</title><meta charset="utf-8"></head>
 <body>
+<strong>If an applet is referenced too soon, then sometimes calling methods on the applet fail.</strong>
+<p>This test points out a failure at least in OS X 10.7 or 10.8, Firefox 21, Java 1.7.0_25-b15
+The test attempts to call a method on an applet. If the applet is simply referenced: "refToApplet = document.getElementById('testApplet')"
+too soon, then sometimes the method call fails. This page logs in sessionStorage each attempt. The timing of the attempt can be changed
+with the text fields. My testing has shown that a 200ms initialDelay works without failures. A 100ms initialDelay works very often but
+around 1/100 times it fails. An interesting note is the 'toString()' value of the applet. When things work it is the Java class name, when they fail it is
+[object HTMLAppletElement]</p>
 <applet id="testApplet"
  code="applets.DetectionApplet"
  width="150px"
@@ -11,7 +18,13 @@
 initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
 testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loadParams()"></input>ms
 <a href="#" onclick="sessionStorage.log = ''; document.getElementById('log').innerHTML = ''">clear log</a>
-<div id='log'></div>
+<table>
+  <thead><tr>
+    <th>initialDelay(ms)</th><th>testDelay(ms)</th><th>method call</th><th>applet.toString()</th>
+  </tr></thead>
+  <tbody id='log'>
+  </tbody>
+</table>
 <script>
   if(typeof(sessionStorage.log) !== 'string') {
     sessionStorage.log = "";
@@ -25,9 +38,6 @@ testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loa
     }
   };
 
-  // A key thing lost here is the value of toString of the applet
-  // when it works it is the class name and values
-  // when it doesn't work it is [Object HTMLApplet] or something like that
   var initialDelay = 5, testDelay = 300;
 
   loadParams = function() {
@@ -43,7 +53,8 @@ testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loa
     refToApplet = document.getElementById('testApplet');
     setTimeout(function() {
       appletReady = testAppletReady();
-      sessionStorage.log += initialDelay + "ms " + testDelay + "ms " + (appletReady?"ready":"not ready") + "<br>";
+      sessionStorage.log += "<tr><td>" + initialDelay + "</td><td>" + testDelay + "</td><td>" + (appletReady?"pass":"fail") + 
+                            "</td><td>" + document.getElementById('testApplet').toString() + "</td></tr>";
       logElement = document.getElementById('log').innerHTML = sessionStorage.log;
     }, testDelay);
   }, initialDelay);
