@@ -1,0 +1,48 @@
+<applet id="testApplet"
+ code="applets.DetectionApplet"
+ width="150px"
+ height="150px"
+ MAYSCRIPT="true">
+  <param name="MAYSCRIPT" value="true" />
+  <param name="classloader_cache" value="false">
+</applet><br>
+initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
+testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loadParams()"></input>ms
+<a href="#" onclick="sessionStorage.log = ''; document.getElementById('log').innerHTML = ''">clear log</a>
+<div id='log'></div>
+<script>
+  if(typeof(sessionStorage.log) !== 'string') {
+    sessionStorage.log = "";
+  }
+
+  testAppletReady = function() {
+    try {
+      return document.getElementById('testApplet').areYouLoaded();
+    } catch(e) {
+      return false;
+    }
+  };
+
+  // A key thing lost here is the value of toString of the applet
+  // when it works it is the class name and values
+  // when it doesn't work it is [Object HTMLApplet] or something like that
+  var initialDelay = 5, testDelay = 300;
+
+  loadParams = function() {
+    if (sessionStorage.initialDelay) initialDelay = parseInt(sessionStorage.initialDelay);
+    if (sessionStorage.testDelay) testDelay = parseInt(sessionStorage.testDelay);
+  };
+
+  loadParams();
+  document.getElementById('initialDelay').value = initialDelay.toString();
+  document.getElementById('testDelay').value = testDelay.toString();
+
+  setTimeout(function () {
+    refToApplet = document.getElementById('testApplet');
+    setTimeout(function() {
+      appletReady = testAppletReady();
+      sessionStorage.log += initialDelay + "ms " + testDelay + "ms " + (appletReady?"ready":"not ready") + "<br>";
+      logElement = document.getElementById('log').innerHTML = sessionStorage.log;
+    }, testDelay);
+  }, initialDelay);
+</script>
