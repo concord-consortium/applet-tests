@@ -6,5 +6,8 @@ Jekyll can also be run locally:
 
     bundle install --binstubs
     bin/jekyll serve --watch
-    open http://localhost:4000
+    open http://localhost:4000/applet-tests
+
+Note: If you fork this repository and give it a different name you'll need to change the
+`baseurl` defined in `_config.yml`.
 
