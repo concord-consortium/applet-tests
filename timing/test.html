@@ -1,5 +1,8 @@
-<html><head><title>Test Applet Load Timing</title><meta charset="utf-8"></head>
-<body>
+---
+layout: default
+title: Test Applet Load Timing
+show_in_toc: true
+---
 <strong>If an applet is referenced too soon, then sometimes calling methods on the applet fail.</strong>
 <p>This test points out a failure at least in OS X 10.7 or 10.8, Firefox 21, Java 1.7.0_25-b15
 The test attempts to call a method on an applet. If the applet is simply referenced: "refToApplet = document.getElementById('testApplet')"
@@ -59,4 +62,3 @@ testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loa
     }, testDelay);
   }, initialDelay);
 </script>
-</body></html>

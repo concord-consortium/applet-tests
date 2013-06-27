@@ -1,6 +1,14 @@
-<html>
- <head><title>Applet Tests</title></head>
- <body>
-  A place to host some tests of applets that expose issues in various browsers.
- </body>
-</html>
+---
+layout: default
+title: Applet Tests2
+---
+
+Tests of applets that expose issues in various browsers.
+
+<ul>
+  {% for page in site.html_pages %}
+    {% if page.title and page.show_in_toc %}
+      <li><a href="{{ page.url | remove:'index.html' }}">{{ page.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
