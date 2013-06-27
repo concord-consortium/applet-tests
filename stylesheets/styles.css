@@ -1,0 +1,17 @@
+div.sitename {
+	font-size: 2em;
+	text-decoration:none;
+}
+div.sitename a:link { text-decoration:none; color:inherit;}
+div.sitename a:visited { text-decoration:none; color:inherit; }
+div.sitename a:hover { text-decoration:none; color:inherit; }
+div.sitename a:active { text-decoration:none; color:inherit; }
+
+div.top {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+a.view-source {
+	float: right;
+}
