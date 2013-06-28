@@ -13,7 +13,9 @@
     </div>
 
     <div id="content">
-      <h1>{{ page.title }}</h1>
+      {% if page.title != "Applet Tests" %}
+        <h1>{{ page.title }}</h1>
+      {% endif %}
       {{ content }}
     </div>
   </body>
