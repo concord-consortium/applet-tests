@@ -45,9 +45,12 @@ a signed applet. <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/
   	} catch (e) {
        log(label + " exception while accesing instanceMethod: " + e);
   	}
-
-    testApplet.roundTrip("log('" + label + " hello from the applet same thread');",
+    try {
+      testApplet.roundTrip("log('" + label + " hello from the applet same thread');",
       	                   "log('" + label + " hello from the applet different thread');");
+    } catch (e) {
+    	log(label + " exception while testing roundTrip: " + e);
+    }
   };
 
   setTimeout(function() {
