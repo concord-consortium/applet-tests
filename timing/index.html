@@ -4,22 +4,24 @@ title: Test Applet Load Timing
 show_in_toc: true
 ---
 <strong>If an applet is referenced too soon, then sometimes calling methods on the applet fail.</strong>
-<p>This test points out a failure at least in OS X 10.7 or 10.8, Firefox 21, Java 1.7.0_25-b15
+<p>This test points out a failure in OS X 10.7 or 10.8, Firefox 21 or 22, Java 1.7.0_25-b15
 The test injects an applet on the page, saves a reference to the applet dom object, then calls a method on the applet.
-If the reference to the dom object is saved too soon then sometimes the method call fails.
-To run this test, reload this pages multiple times. You should see 'failed' in the method column. If you you increase
+If the reference to the dom object is saved too soon then sometimes the method call fails.</p>
+
+<p>To run this test, reload this page multiple times. You should see 'fail' in the method call column. If you you increase
 the initialDelay and reload the page the failures should decrease.
-This page logs in sessionStorage each attempt, and the initialDelay and testDelay are also stored in sessionStorage.
+This page uses sessionStorage to log the results and save the initialDelay and testDelay.
 If the initialDelay is 0 then setTimeout is not used. Even a setTimeout(...,0) reduces the number of failures.
-My testing has shown that a 50ms initialDelay works without failures.
+My testing has shown that a 50ms initialDelay works without failures.</p>
 
-An interesting note is the 'toString()' value of the applet. When things work it is the Java class name, when they fail it is
-[object HTMLAppletElement]
-
-Another note is that this test can also be done without injecting the applet on the page. However the page needs to be
-stripped down. If there is content before the applet tag then the test rarely fails. If there is no content before
-the applet tag then the test will fail often and it can take up to a 200ms initialDelay before the failures completely
-go away.
+<p>This issues does not appear present in Safari with the same OS and Java. It also doesn't appear with the same
+version of Firefox but on OS X 10.6 with Java 1.6.
+When the method call suceeds applet.toString() is the Java class name, when the method call fails it is
+[object HTMLAppletElement].
+This issue can also be seen without injecting the applet on the page. However the page needs to be
+stripped down. If there is content before the applet tag then the issue rarely occurs. If there is no content before
+the applet tag, then the test will fail often, and it can take up to a 200ms initialDelay before the failures completely
+go away.</p>
 </p>
 <div id="appletContainer"></div>
 initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
@@ -37,14 +39,6 @@ testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loa
     sessionStorage.log = "";
   }
 
-  testAppletReady = function() {
-    try {
-      return document.getElementById('testApplet').areYouLoaded();
-    } catch(e) {
-      return false;
-    }
-  };
-
   var initialDelay = 0, testDelay = 300;
 
   loadParams = function() {
@@ -55,6 +49,14 @@ testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loa
   loadParams();
   document.getElementById('initialDelay').value = initialDelay.toString();
   document.getElementById('testDelay').value = testDelay.toString();
+
+  testAppletReady = function() {
+    try {
+      return document.getElementById('testApplet').areYouLoaded();
+    } catch(e) {
+      return false;
+    }
+  };
 
   runTest = function() {
     refToApplet = document.getElementById('testApplet');
