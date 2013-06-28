@@ -10,8 +10,22 @@ div.sitename a:active { text-decoration:none; color:inherit; }
 div.top {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
+	max-width: 960px;
+    margin: 25px auto 22px;
+}
+
+div#content {
+	max-width: 960px;
+	margin: 0px auto;
 }
 
 a.view-source {
 	float: right;
+}
+
+body {
+	font-family: helvetica, arial, verdana, sans-serif;
+	width: 90%;
+    margin: 0px auto 60px;
+    padding: 0px;
 }
