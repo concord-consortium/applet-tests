@@ -2,4 +2,4 @@ safe: true
 lsi: false
 pygments: true
 baseurl: /applet-tests
-github_repo: https://github.com/scytacki/applet-tests
+github_repo: scytacki/applet-tests
