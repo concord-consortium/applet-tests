@@ -15,8 +15,8 @@ If the initialDelay is 0 then setTimeout is not used. Even a setTimeout(...,0) r
 My testing has shown that a 50ms initialDelay works without failures.</p>
 
 <p>This issues does not appear present in Safari with the same OS and Java. It also doesn't appear with the same
-version of Firefox but on OS X 10.6 with Java 1.6.
-When the method call suceeds applet.toString() is the Java class name, when the method call fails it is
+version of Firefox but on OS X 10.6 with Java 1.6. It also doesn't appear in Windows 7 with the same Firefox and Java
+versions. When the method call suceeds applet.toString() is the Java class name, when the method call fails it is
 [object HTMLAppletElement].
 This issue can also be seen without injecting the applet on the page. However the page needs to be
 stripped down. If there is content before the applet tag then the issue rarely occurs. If there is no content before
