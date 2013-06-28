@@ -1,8 +1,57 @@
 ---
 layout: default
 title: Cross domain scripting
-show_in_todos: true
+show_in_toc: true
 ---
 
-There are limitations on where an applet can come from and whether scripts can access it from the page. This has so far only been reported on Safari.
-TODO: add a test for this
+<p>There were limitations on where an applet can come from and whether scripts can access it from the page. This used to be a problem in Safari but so far
+I haven't been able to reproduce it. Currently this test loads 2 signed applets one from the same host and one from a different host.
+It then calls methods on each one and also has each one call javascript. 
+<a href="http://jogamp.org/applet-launcher/www/#SCRIPTING">A discussion about scripting cross domain on safari</a>
+</p>
+
+<p>The jar of the applets is also marked as a trusted-library. Otherwise a message is shown to the user when javascript tries to access
+a signed applet. <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/mixed_code.html">Offical docs about Trusted-Library and Javascript</a>.
+</p>
+
+
+<applet id="sameDomainApplet" code="applets.CrossDomainTest" archive="cross-domain.jar" width="150px" height="150px" MAYSCRIPT="true">
+<param name="MAYSCRIPT" value="true" />
+<param name="classloader_cache" value="false">
+<param name="codebase_lookup" value="false">
+</applet>
+
+<applet id="crossDomainApplet" codebase="https://raw.github.com/scytacki/applet-tests/gh-pages/crossdomain-scripting"
+        code="applets.CrossDomainTest" archive="cross-domain.jar" width="150px" height="150px" MAYSCRIPT="true">
+<param name="MAYSCRIPT" value="true" />
+<param name="classloader_cache" value="false">
+<param name="codebase_lookup" value="false">
+</applet>
+
+<div id="output"></div>
+
+<script>
+  log = function(msg){
+  	document.getElementById('output').innerHTML += msg + "<br>";
+  }
+
+  runTest = function(testApplet, label){
+  	try {
+  	   if (testApplet.instanceMethod() == true) {
+  	   	  log(label + " passed instanceMethod access");
+  	   } else {
+  	   	  log(label + " failed instanceMethod access");
+  	   }
+  	} catch (e) {
+       log(label + " exception while accesing instanceMethod: " + e);
+  	}
+
+    testApplet.roundTrip("log('" + label + " hello from the applet same thread');",
+      	                   "log('" + label + " hello from the applet different thread');");
+  };
+
+  setTimeout(function() {
+  	runTest(sameDomainApplet, "sameDomain: ");
+  	runTest(crossDomainApplet, "crossDomain: ");
+  }, 300);
+</script>
