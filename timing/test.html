@@ -1,0 +1,40 @@
+---
+layout: default
+title: Timing Test
+---
+<div id="appletContainer"></div>
+initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
+testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loadParams()"></input>ms
+<a href="#" onclick="sessionStorage.log = ''; document.getElementById('log').innerHTML = ''">clear log</a>
+<table>
+  <thead><tr>
+    <th>initialDelay(ms)</th><th>testDelay(ms)</th><th>method call</th><th>applet.toString()</th>
+  </tr></thead>
+  <tbody id='log'>
+  </tbody>
+</table>
+<script src="timing.js"></script>
+<script>
+  if(typeof(sessionStorage.log) !== 'string') {
+    sessionStorage.log = "";
+  }
+
+  var initialDelay = 0, testDelay = 300;
+
+  loadParams = function() {
+    if (sessionStorage.initialDelay) initialDelay = parseInt(sessionStorage.initialDelay);
+    if (sessionStorage.testDelay) testDelay = parseInt(sessionStorage.testDelay);
+  };
+
+  loadParams();
+  document.getElementById('initialDelay').value = initialDelay.toString();
+  document.getElementById('testDelay').value = testDelay.toString();
+
+  log = function(initialDelay, testDelay, result, appletToString) {
+    sessionStorage.log += "<tr><td>" + initialDelay + "</td><td>" + testDelay + "</td><td>" + result +
+                            "</td><td>" + appletToString + "</td></tr>";
+    logElement = document.getElementById('log').innerHTML = sessionStorage.log;
+  };
+
+  testTiming(initialDelay, testDelay);
+</script>

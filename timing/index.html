@@ -23,60 +23,9 @@ stripped down. If there is content before the applet tag then the issue rarely o
 the applet tag, then the test will fail often, and it can take up to a 200ms initialDelay before the failures completely
 go away.</p>
 </p>
-<div id="appletContainer"></div>
-initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
-testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loadParams()"></input>ms
-<a href="#" onclick="sessionStorage.log = ''; document.getElementById('log').innerHTML = ''">clear log</a>
-<table>
-  <thead><tr>
-    <th>initialDelay(ms)</th><th>testDelay(ms)</th><th>method call</th><th>applet.toString()</th>
-  </tr></thead>
-  <tbody id='log'>
-  </tbody>
-</table>
-<script>
-  if(typeof(sessionStorage.log) !== 'string') {
-    sessionStorage.log = "";
-  }
 
-  var initialDelay = 0, testDelay = 300;
+<a href="test.html">Run Timing Test</a>
 
-  loadParams = function() {
-    if (sessionStorage.initialDelay) initialDelay = parseInt(sessionStorage.initialDelay);
-    if (sessionStorage.testDelay) testDelay = parseInt(sessionStorage.testDelay);
-  };
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/timing/timing.js"></script>
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/timing/applets/DetectionApplet.java?slice=5:"></script>
 
-  loadParams();
-  document.getElementById('initialDelay').value = initialDelay.toString();
-  document.getElementById('testDelay').value = testDelay.toString();
-
-  testAppletReady = function() {
-    try {
-      return document.getElementById('testApplet').areYouLoaded();
-    } catch(e) {
-      return false;
-    }
-  };
-
-  runTest = function() {
-    refToApplet = document.getElementById('testApplet');
-    setTimeout(function() {
-      appletReady = testAppletReady();
-      sessionStorage.log += "<tr><td>" + initialDelay + "</td><td>" + testDelay + "</td><td>" + (appletReady?"pass":"fail") + 
-                            "</td><td>" + document.getElementById('testApplet').toString() + "</td></tr>";
-      logElement = document.getElementById('log').innerHTML = sessionStorage.log;
-    }, testDelay);
-  };
-
-  document.getElementById('appletContainer').innerHTML =
-    '<applet id="testApplet" code="applets.DetectionApplet" width="150px" height="150px" MAYSCRIPT="true">' +
-    '<param name="MAYSCRIPT" value="true" />' +
-    '<param name="classloader_cache" value="false">' +
-    '</applet>';
-
-  if (initialDelay === 0) {
-    runTest();
-  } else {
-    setTimeout(runTest, initialDelay);
-  }
-</script>
