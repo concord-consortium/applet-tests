@@ -22,25 +22,29 @@ Here is a <a href="https://forums.oracle.com/message/10972687">unanswered oracle
 
 <div id="output"></div>
 <script>
+  log = function(message) {
+    document.getElementById('output').innerHTML += message + '<br>';
+  };
+
   // setTimeout is used to avoid the possibility of applet initiation issues
   setTimeout(function(){
   	try {
 	  	if(testApplet.Packages.applets.PackagesTest.staticInteger == 3) {
-	  		document.getElementById('output').innerHTML += 'passed static field test<br>';
+	  		log('passed static field test');
 	  	} else {
-	  		document.getElementById('output').innerHTML += 'failed static field test<br>';
+	  		log('failed static field test');
 	  	}
 	} catch(e) {
-		document.getElementById('output').innerHTML += 'exception on static field test: ' + e.toString() + '<br>';
+		log('exception on static field test: ' + e.toString());
 	}
 	try {
 	  	if(testApplet.Packages.applets.PackagesTest.staticMethod() != 4) {
-	  		document.getElementById('output').innerHTML += 'failed static method test<br>';
+	  		log('failed static method test');
 	  	} else {
-	  		document.getElementById('output').innerHTML += 'passed static method test<br>';
+	  		log('passed static method test');
 	  	}
 	} catch (e) {
-	    document.getElementById('output').innerHTML += 'exception on static method test: ' + e.toString() + '<br>';
+	    log('exception on static method test: ' + e.toString());
 	}
   }, 300);
 </script>
