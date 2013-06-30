@@ -2,6 +2,14 @@
 layout: default
 title: Timing Test
 ---
+
+<p>To run this test, reload this page multiple times. If your environment has a problem then you should see
+some 'fail's in the method call column. If you you increase
+the initialDelay and reload the page the failures should decrease.
+This page uses sessionStorage to log the results and save the initialDelay and testDelay.
+If the initialDelay is 0 then setTimeout is not used. Even a setTimeout(...,0) reduces the number of failures.
+My testing has shown that a 50ms initialDelay works without failures.</p>
+
 <div id="appletContainer"></div>
 initialDelay:<input id='initialDelay' onblur="sessionStorage.initialDelay=this.value; loadParams()"></input>ms
 testDelay:<input id='testDelay' onblur="sessionStorage.testDelay=this.value; loadParams()"></input>ms
