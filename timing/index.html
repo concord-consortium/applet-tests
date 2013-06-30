@@ -3,7 +3,10 @@ layout: default
 title: Test Applet Load Timing
 show_in_toc: true
 ---
-<strong>If an applet is referenced too soon, then sometimes calling methods on the applet fail.</strong>
+<h4>If an applet is referenced too soon, then sometimes calling methods on the applet fail.</h4>
+
+<a href="test.html">Run Timing Test</a>
+
 <p>This test points out a failure in OS X 10.7 or 10.8, Firefox 21 or 22, Java 1.7.0_25-b15
 The test injects an applet on the page, saves a reference to the applet dom object, then calls a method on the applet.
 If the reference to the dom object is saved too soon then sometimes the method call fails.</p>
@@ -24,8 +27,11 @@ the applet tag, then the test will fail often, and it can take up to a 200ms ini
 go away.</p>
 </p>
 
-<a href="test.html">Run Timing Test</a>
-
+<div>
+<div id='gist-it-timingjs' style='width: 34em; float: left; margin-left: 10px'>
 <script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/timing/timing.js"></script>
+</div>
+<div id='gist-it-appletjs' style='width: 24em; float: left; margin-left: 10px'>
 <script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/timing/applets/DetectionApplet.java?slice=5:"></script>
-
+</div>
+</div>

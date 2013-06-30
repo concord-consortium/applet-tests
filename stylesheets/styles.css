@@ -27,3 +27,7 @@ body {
     margin: 0px auto 60px;
     padding: 0px;
 }
+
+.gist-it-gist {
+	font-size: 90%;
+}
