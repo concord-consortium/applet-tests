@@ -18,23 +18,23 @@ title: Packages Test
 
   // setTimeout is used to avoid the possibility of applet initiation issues
   setTimeout(function(){
-  	try {
-	  	if(testApplet.Packages.applets.PackagesTest.staticInteger == 3) {
-	  		log('passed static field test');
-	  	} else {
-	  		log('failed static field test');
-	  	}
-	} catch(e) {
-		log('exception on static field test: ' + e.toString());
-	}
-	try {
-	  	if(testApplet.Packages.applets.PackagesTest.staticMethod() != 4) {
-	  		log('failed static method test');
-	  	} else {
-	  		log('passed static method test');
-	  	}
-	} catch (e) {
-	    log('exception on static method test: ' + e.toString());
-	}
+    try {
+      if(testApplet.Packages.applets.PackagesTest.staticInteger == 3) {
+        log('passed static field test');
+      } else {
+        log('failed static field test');
+      }
+    } catch(e) {
+      log('exception on static field test: ' + e.toString());
+    }
+    try {
+      if(testApplet.Packages.applets.PackagesTest.staticMethod() != 4) {
+        log('failed static method test');
+      } else {
+        log('passed static method test');
+      }
+    } catch (e) {
+      log('exception on static method test: ' + e.toString());
+    }
   }, 300);
 </script>

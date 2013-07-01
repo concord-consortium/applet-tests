@@ -22,11 +22,11 @@ Source code:
 
 <div>
 <div id='gist-it-packagesjs' style='width: 34em; float: left; margin-left: 10px'>
-<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/packages/test.html?slice=15:39">
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/packages/test.html?slice=18:38">
 </script>
 </div>
 <div id='gist-it-appletjs' style='width: 24em; float: left; margin-left: 10px'>
-<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/packages/applets/PackagesTest.java?slice=6:">
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/packages/applets/PackagesTest.java?slice=5:">
 </script>
 </div>
 </div>
