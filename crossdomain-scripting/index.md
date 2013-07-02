@@ -14,9 +14,11 @@ a signed applet. [Offical docs about Trusted-Library and Javascript](http://docs
 
 [Run Test](test.html)
 
+### Source Code
+
 <div>
 <div id='gist-it-xdomainjs' style='width: 34em; float: left; margin-left: 10px'>
-<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/crossdomain-scripting/test.html?slice=28:49">
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/crossdomain-scripting/test.html?slice=28:50">
 </script>
 </div>
 <div id='gist-it-appletjs' style='width: 24em; float: left; margin-left: 10px'>
