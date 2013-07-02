@@ -27,20 +27,21 @@ title: Cross domain scripting
   }
 
   runTest = function(testApplet, label){
-  	try {
-  	   if (testApplet.instanceMethod() == true) {
-  	   	  log(label + " passed instanceMethod access");
-  	   } else {
-  	   	  log(label + " failed instanceMethod access");
-  	   }
-  	} catch (e) {
-       log(label + " exception while accesing instanceMethod: " + e);
-  	}
     try {
-      testApplet.roundTrip("log('" + label + " hello from the applet same thread');",
-      	                   "log('" + label + " hello from the applet different thread');");
+       if (testApplet.instanceMethod() == true) {
+       	  log(label + " passed instanceMethod access");
+       } else {
+       	  log(label + " failed instanceMethod access");
+       }
     } catch (e) {
-    	log(label + " exception while testing roundTrip: " + e);
+       log(label + " exception while accesing instanceMethod: " + e);
+    }
+    try {
+      testApplet.roundTrip(
+        "log('" + label + " hello from the applet same thread');",
+      	"log('" + label + " hello from the applet different thread');");
+    } catch (e) {
+      log(label + " exception while testing roundTrip: " + e);
     }
   };
 
