@@ -20,11 +20,7 @@ title: Init Notification
     appletPollerCount+=1;
     if(window.appletReady) {
       clearInterval(appletPoller);
-
       log('applet is ready');
-      // Note this method is not called directly from the javascript
-      // executed by the applet, doing that might cause problems:
-      // http://download.java.net/jdk8/docs/technotes/guides/jweb/applet/applet_execution.html
       if(initApplet.instanceMethod() === true){
         log('called method on applet');
       }
@@ -37,7 +33,8 @@ title: Init Notification
   }, 100);
 
   document.getElementById('appletContainer').innerHTML =
-    '<applet id="initApplet" code="applets.InitNotification" width="150px" height="150px">' +
+    '<applet id="initApplet" code="applets.InitNotification" '+
+         'width="150px" height="150px">' +
     '<param name="classloader_cache" value="false">' +
     '<param name="runOnInit" value="window.appletReady=true">' +
     '</applet>';
