@@ -10,6 +10,8 @@ show_in_toc: true
 This test points out a failure in OS X 10.7 or 10.8, Firefox 21 or 22, Java 1.7.0_25-b15
 The test injects an applet on the page, saves a reference to the applet dom object, then calls a method on the applet.
 If the reference to the dom object is saved too soon then sometimes the method call fails.
+There is a [Firefox bug report](https://bugzilla.mozilla.org/show_bug.cgi?id=872969) for this. There should
+be a bug filed on Java's issue tracker to keep the momentum moving on it.
 
 To run this test, reload the test page multiple times. You should see 'fail' in the method call column. If you you increase
 the initialDelay and reload the page the failures should decrease.
@@ -24,6 +26,11 @@ This issue can also be seen without injecting the applet on the page. However th
 stripped down. If there is content before the applet tag then the issue rarely occurs. If there is no content before
 the applet tag, then the test will fail often, and it can take up to a 200ms initialDelay before the failures completely
 go away.
+
+### Relevant Bugs
+- [Firefox bug report 872969](https://bugzilla.mozilla.org/show_bug.cgi?id=872969) - this is currently closed because it
+isn't clear how Firefox can fix this problem.
+- there should be a Java bug filed for this issue
 
 <div>
 <div id='gist-it-timingjs' style='width: 34em; float: left; margin-left: 10px'>
