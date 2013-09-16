@@ -19,6 +19,11 @@ from java to javascript and back again.  The
 [jdk8 applet execution guide](http://download.java.net/jdk8/docs/technotes/guides/jweb/applet/applet_execution.html)
 implies that can cause problems.
 
+I've also seen issues on IE where a exception is thrown when the plugin tries to run the applet start method.
+This might be related to this approach of calling JSObject.getWindow in the init method. However running this
+specific test does not have that problem. But it could be related to how the applet is added to the page and
+the complexity of the page. It might be safer to call back to javascript in the start method instead of the init
+method.
 
 <div>
 <div id='gist-it-init-notificationjs' style='width: 34em; float: left; margin-left: 10px'>
