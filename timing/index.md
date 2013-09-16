@@ -7,11 +7,13 @@ show_in_toc: true
 
 [Run Timing Test](test.html)
 
-This test points out a failure in OS X 10.7 or 10.8, Firefox 21 or 22, Java 1.7.0_25-b15
+This test points out a failure in OS X 10.7 or 10.8, Firefox 21, 22, and 23, Java 1.7.0_25-b15
 The test injects an applet on the page, saves a reference to the applet dom object, then calls a method on the applet.
 If the reference to the dom object is saved too soon then sometimes the method call fails.
-There is a [Firefox bug report](https://bugzilla.mozilla.org/show_bug.cgi?id=872969) for this. There should
-be a bug filed on Java's issue tracker to keep the momentum moving on it.
+There is a [Firefox bug report](https://bugzilla.mozilla.org/show_bug.cgi?id=872969) for this.
+And there has also been a private Java bug filed for it. The owner of that private bug is adding
+comments to the Firefox bug about its status. As of Sept. 16, 2013 he things the Java fix
+will be included in 7u45 which is due in October.
 
 To run this test, reload the test page multiple times. You should see 'fail' in the method call column. If you you increase
 the initialDelay and reload the page the failures should decrease.
