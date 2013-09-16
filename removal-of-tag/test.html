@@ -32,16 +32,15 @@ title: Applet Removal
   }
 
   blankInnerHTML = function(){
-    var appletContainer = document.getElementById('appletContainer');
-    appletContainer.innerHTML = "";
+    document.getElementById('appletContainer').innerHTML = "";    
   }
 
   document.getElementById('appletContainer').innerHTML =
     '<applet id="initApplet" code="applets.InitNotification" '+
          'width="150px" height="150px">' +
     '<param name="classloader_cache" value="false">' +
-    '<param name="runOnInit" value="window.log(\'applet init called\')">' +
-    '<param name="runOnDestroy" value="window.log(\'applet destroy called\')">' +
+    '<param name="runOnInit" value="log(\'init called\')">' +
+    '<param name="runOnDestroy" value="log(\'destroy called\')">' +
     '</applet>';
 </script>
 
