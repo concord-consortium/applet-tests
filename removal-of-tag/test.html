@@ -1,0 +1,53 @@
+---
+layout: default
+title: Applet Removal
+---
+
+<a href="index.html">Documentation</a>
+<br>
+
+<div id="appletContainer"></div>
+
+<div id="output"></div>
+
+<a href="#" onclick="removeApplet()">Remove Applet</a>
+<a href="#" onclick="removeAppletContainer()">Remove Applet Container</a>
+<a href="#" onclick="blankInnerHTML()">Blank out innerHTML of container</a>
+
+<script>
+  window.log = function(msg){
+    document.getElementById('output').innerHTML += msg + "<br>";
+  };
+
+  appletInitCalled = function() {
+    setTimeout(function(){
+      log('applet init called');
+    }, 5);
+  };
+
+  removeApplet = function(){
+    var applet = document.getElementById('initApplet');
+    log('applet object accessed');
+    applet.parentNode.removeChild(applet);
+    log('applet removed');
+  }
+
+  removeAppletContainer = function(){
+    var appletContainer = document.getElementById('appletContainer');
+    appletContainer.parentNode.removeChild(appletContainer);
+  }
+
+  blankInnerHTML = function(){
+    var appletContainer = document.getElementById('appletContainer');
+    appletContainer.innerHTML = "";
+  }
+
+  document.getElementById('appletContainer').innerHTML =
+    '<applet id="initApplet" code="applets.InitNotification" '+
+         'width="150px" height="150px">' +
+    '<param name="classloader_cache" value="false">' +
+    '<param name="runOnInit" value="window.appletInitCalled()">' +
+    '</applet>';
+</script>
+
+
