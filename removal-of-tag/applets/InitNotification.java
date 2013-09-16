@@ -20,4 +20,11 @@ public class InitNotification extends Applet {
     JSObject window = JSObject.getWindow(this);
     window.eval(getParameter("runOnInit"));
   }
+
+  @Override
+  public void destroy() {
+    JSObject window = JSObject.getWindow(this);
+    window.eval(getParameter("runOnDestroy"));
+  }
+
 }
