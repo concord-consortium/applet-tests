@@ -1,0 +1,44 @@
+---
+layout: default
+title: Multi Threaded
+---
+
+<a href="index.html">Documentation</a>
+<br>
+
+<div id="appletContainer">
+  <applet id="blockingApplet" code="applets.BlockingCall"
+          width="150px" height="150px">
+    <param name="classloader_cache" value="false">
+    <param name="runOnInit" value="appletReady()">
+  </applet>
+</div>
+
+<div id="output"></div>
+
+<script>
+  window.log = function(msg){
+    document.getElementById('output').innerHTML += msg + "<br>";
+  };
+
+  function appletReady() {
+    log('appletReady');
+    setTimeout(function(){
+      testBlockingCall();
+    }, 5);
+  }
+
+  function testBlockingCall() {
+    setTimeout(function(){
+      log('starting first bit of code');
+      var applet = document.getElementById('blockingApplet');
+      applet.sleep(1000);
+      log('ending first bit of code');
+    }, 100);
+    setTimeout(function(){
+      log('running second bit of code');
+    }, 200);
+  }
+</script>
+
+
