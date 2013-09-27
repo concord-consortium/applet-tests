@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" media="screen" href="{{site.baseurl}}/stylesheets/styles.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  </head>
+  <body>
+  	<div class="top">
+      <header>
+        <div class="sitename"><a href ="{{site.baseurl}}/">Applet Tests</a></div>
+        <a href="https://github.com/{{site.github_repo}}/blob/gh-pages/{{page.path}}" class="view-source">View page on GitHub</a>
+      </header>
+    </div>
+
+    <div id="content">
+      {% if page.title != "Applet Tests" %}
+        <h1>{{ page.title }}</h1>
+      {% endif %}
+      {{ content }}
+    </div>
+  </body>
+</html>

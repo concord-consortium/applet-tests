@@ -1,0 +1,47 @@
+---
+layout: jquery
+title: Init Notification
+---
+
+<a href="index.html">Documentation</a>
+<br>
+
+<div id="appletContainer"></div>
+
+<div id="output"></div>
+
+<script>
+  log = function(msg){
+    document.getElementById('output').innerHTML += msg + "<br>";
+  }
+
+  var appletPollerCount = 0;
+  var appletPoller = setInterval(function(){
+    appletPollerCount+=1;
+    if(window.appletReady) {
+      clearInterval(appletPoller);
+      log('applet is ready');
+      try {
+        if(initApplet.instanceMethod() === true){
+          log('called method on applet');
+        }
+      } catch(e) {
+        log('failed to call applet method');
+      }
+    } else {
+      if(appletPollerCount>30){
+        clearInterval(appletPoller);
+        log('timed out waiting for applet to become ready');
+      }
+    }
+  }, 100);
+
+  $('#appletContainer').append(
+    '<applet id="initApplet" code="applets.InitNotification" '+
+         'width="150px" height="150px">' +
+    '<param name="classloader_cache" value="false">' +
+    '<param name="runOnInit" value="window.appletReady=true">' +
+    '</applet>');
+</script>
+
+
