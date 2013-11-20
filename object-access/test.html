@@ -11,6 +11,11 @@ title: Rich java object access
 <param name="permissions" value="all-permissions" />
 </applet>
 
+<div>Things to be aware of:<br/>
+  <ul>
+    <li>float return types will likely have rounding errors and won't match exactly</li>
+    <li>the Java 'char' type is converted to a number in javascript. Use 'String.fromCharCode()' to convert it to a character string.</li>
+    <li>class visibility appears to be very important, so be careful how the classes you're passing back to javascript are defined!</li>
 <script>
   var applet = document.getElementById('objectAccessApplet');
   describe('Tests', function() {
@@ -25,7 +30,7 @@ title: Rich java object access
         expect(applet.booleanMethod()).to.be(false);
       });
       it('should support char return values', function() {
-        expect(applet.charMethod()).to.be('A');
+        expect(String.fromCharCode(applet.charMethod())).to.be('A');
       });
       it('should support byte return values', function() {
         expect(applet.byteMethod()).to.be(42);
@@ -40,7 +45,7 @@ title: Rich java object access
         expect(applet.longMethod()).to.be(956397711296);
       });
       it('should support float return values', function() {
-        expect(applet.floatMethod()).to.be(7.12345);
+        expect(applet.floatMethod()).to.be(7.123449802398682);
       });
       it('should support double return values', function() {
         expect(applet.doubleMethod()).to.be(98.76543321);
@@ -54,6 +59,33 @@ title: Rich java object access
       it('should support object return values', function() {
         expect(applet.objectMethod()).to.be.ok();
       });
+      describe("Object visibility", function() {
+        it('should support public class access', function() {
+          expect(applet.objectMethod().booleanMethod()).to.be(true);
+        });
+        it('should support package private class access', function() {
+          expect(applet.packagePrivateObject().booleanMethod()).to.be(true);
+        });
+        it('should support package private extended class access', function() {
+          expect(applet.packagePrivateExtendedObject().ppBooleanMethod()).to.be(true);
+          expect(applet.packagePrivateExtendedObject().booleanMethod()).to.be(false);
+        });
+        it('should support package internal public class access', function() {
+          expect(applet.internalPublicObject().booleanMethod()).to.be(true);
+        });
+        it('should support package internal protected class access', function() {
+          expect(applet.internalProtectedObject().booleanMethod()).to.be(true);
+        });
+        it('should support package internal private class access', function() {
+          expect(applet.internalPrivateObject().booleanMethod()).to.be(true);
+        });
+        it('should support package internal package private class access', function() {
+          expect(applet.internalPackagePrivateObject().booleanMethod()).to.be(true);
+        });
+        it('should support package internal anonymous class access', function() {
+          expect(applet.anonymousObject().booleanMethod()).to.be(true);
+        });
+      });
       describe("Object methods", function() {
         it('should support javascript access to public methods', function() {
           expect(function() { applet.objectMethod().canAccess() }).to.not.throwException();
@@ -62,7 +94,7 @@ title: Rich java object access
           expect(applet.objectMethod().booleanMethod()).to.be(true);
         });
         it('should support char return values', function() {
-          expect(applet.objectMethod().charMethod()).to.be('B');
+          expect(String.fromCharCode(applet.objectMethod().charMethod())).to.be('B');
         });
         it('should support byte return values', function() {
           expect(applet.objectMethod().byteMethod()).to.be(43);
@@ -77,7 +109,7 @@ title: Rich java object access
           expect(applet.objectMethod().longMethod()).to.be(956397711297);
         });
         it('should support float return values', function() {
-          expect(applet.objectMethod().floatMethod()).to.be(8.12345);
+          expect(applet.objectMethod().floatMethod()).to.be(8.123449325561523);
         });
         it('should support double return values', function() {
           expect(applet.objectMethod().doubleMethod()).to.be(99.76543321);
@@ -107,7 +139,7 @@ title: Rich java object access
             expect(applet.objectArrayMethod()[2].booleanMethod()).to.be(false);
           });
           it('should support char return values', function() {
-            expect(applet.objectArrayMethod()[2].charMethod()).to.be('E');
+            expect(String.fromCharCode(applet.objectArrayMethod()[2].charMethod())).to.be('E');
           });
           it('should support byte return values', function() {
             expect(applet.objectArrayMethod()[2].byteMethod()).to.be(46);
@@ -122,7 +154,7 @@ title: Rich java object access
             expect(applet.objectArrayMethod()[2].longMethod()).to.be(956397711300);
           });
           it('should support float return values', function() {
-            expect(applet.objectArrayMethod()[2].floatMethod()).to.be(11.12345);
+            expect(applet.objectArrayMethod()[2].floatMethod()).to.be(11.123449325561523);
           });
           it('should support double return values', function() {
             expect(applet.objectArrayMethod()[2].doubleMethod()).to.be(102.76543321);
@@ -150,7 +182,7 @@ title: Rich java object access
             expect(applet.arrayListMethod().get(1).booleanMethod()).to.be(false);
           });
           it('should support char return values', function() {
-            expect(applet.arrayListMethod().get(1).charMethod()).to.be('A');
+            expect(String.fromCharCode(applet.arrayListMethod().get(1).charMethod())).to.be('A');
           });
           it('should support byte return values', function() {
             expect(applet.arrayListMethod().get(1).byteMethod()).to.be(48);
@@ -165,7 +197,7 @@ title: Rich java object access
             expect(applet.arrayListMethod().get(1).longMethod()).to.be(956397711302);
           });
           it('should support float return values', function() {
-            expect(applet.arrayListMethod().get(1).floatMethod()).to.be(13.12345);
+            expect(applet.arrayListMethod().get(1).floatMethod()).to.be(13.123449325561523);
           });
           it('should support double return values', function() {
             expect(applet.arrayListMethod().get(1).doubleMethod()).to.be(104.76543321);

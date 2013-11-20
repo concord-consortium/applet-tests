@@ -6,10 +6,11 @@ import java.util.ArrayList;
 
 public class ObjectAccessTest extends Applet {
   private AccessObject obj = new AccessObject();
+  private String version = "v0.2";
 
   @Override
   public void paint(Graphics g) {
-    g.drawString("Object Access Test", 10, 20);
+    g.drawString("Object Access Test " + version, 10, 20);
   }
 
   public void canAccess() {}
@@ -27,6 +28,18 @@ public class ObjectAccessTest extends Applet {
 
   // Object return
   public AccessObject objectMethod() { return new AccessObject(1); }
+  public PackagePrivateObject packagePrivateObject() { return new PackagePrivateObject(); }
+  public PackagePrivateExtendedObject packagePrivateExtendedObject() { return new PackagePrivateExtendedObject(); }
+  public InternalPublicObject internalPublicObject() { return new InternalPublicObject(); }
+  public InternalProtectedObject internalProtectedObject() { return new InternalProtectedObject(); }
+  public InternalPrivateObject internalPrivateObject() { return new InternalPrivateObject(); }
+  public InternalPackagePrivateObject internalPackagePrivateObject() { return new InternalPackagePrivateObject(); }
+  public Object anonymousObject() {
+    return new Object() {
+      public void canAccess() {}
+      public boolean booleanMethod() { return true; }
+    };
+  }
 
   // Collections
   public AccessObject[] objectArrayMethod() { return new AccessObject[] { new AccessObject(2), new AccessObject(3), new AccessObject(4) }; }
@@ -37,29 +50,30 @@ public class ObjectAccessTest extends Applet {
     }
     return list;
   }
+
+  public class InternalPublicObject {
+    public void canAccess() {}
+    public boolean booleanMethod() { return true; }
+  }
+  protected class InternalProtectedObject {
+    public void canAccess() {}
+    public boolean booleanMethod() { return true; }
+  }
+  private class InternalPrivateObject {
+    public void canAccess() {}
+    public boolean booleanMethod() { return true; }
+  }
+  class InternalPackagePrivateObject {
+    public void canAccess() {}
+    public boolean booleanMethod() { return true; }
+  }
 }
 
-class AccessObject {
-  private int seed;
-  private char[] chars = {'A','B','C','D','E','F'};
-
-  public AccessObject() {
-    this(0);
-  }
-  public AccessObject(int seed) {
-    this.seed = seed;
-  }
-
+class PackagePrivateObject {
   public void canAccess() {}
+  public boolean booleanMethod() { return true; }
+}
 
-  // Primitive returns
-  public boolean booleanMethod() { return (seed % 2 == 0 ? false : true); }
-  public char charMethod() { return chars[seed % chars.length]; }
-  public byte byteMethod() { return (byte) (42 + seed); }
-  public short shortMethod() { return (short) (32767 - seed); }
-  public int intMethod() { return 0xBEA7B07 + seed; }
-  public long longMethod() { return 0xDEADBEEFC0L + seed; }
-  public float floatMethod() { return 7.12345f + seed; }
-  public double doubleMethod() { return 98.76543321 + seed; }
-  public String stringMethod() { return "Congrats! " + Integer.toString(seed); }
+class PackagePrivateExtendedObject extends AccessObject {
+  public boolean ppBooleanMethod() { return true; }
 }
