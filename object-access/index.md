@@ -4,8 +4,11 @@ title: Rich java object access
 show_in_toc: true
 ---
 
-Safari 6.1 has introduced some limitations to javascript access to Java objects returned when calling methods on an applet. This test
-calls and interacts with various return types from an applet and gives information about what return types work and what do not.
+This set of tests is to display the limitations of using javascript to interact with various types of
+Java primitives and Objects that can be returned from a Java applet. It will be useful for tracking changes to
+the various browser's support over time.
+
+In particular, Safari 6.1 no longer is able to access member objects of an array using bracket notation (eg `arr[3]`).
 
 [Run Test](test.html)
 
