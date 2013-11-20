@@ -1,0 +1,182 @@
+---
+layout: mocha
+title: Rich java object access
+---
+
+<a href="index.html">Documentation</a>
+<br>
+
+<applet id="objectAccessApplet" code="applets.ObjectAccessTest" archive="object-access.jar" width="150px" height="150px" MAYSCRIPT="true">
+<param name="MAYSCRIPT" value="true" />
+<param name="permissions" value="all-permissions" />
+</applet>
+
+<script>
+  var applet = document.getElementById('objectAccessApplet');
+  describe('Tests', function() {
+    describe('Script Access', function() {
+      it('should support javascript access to public applet methods', function() {
+        expect(function() { applet.canAccess() }).to.not.throwException();
+      });
+    });
+
+    describe('Primitives', function() {
+      it('should support boolean return values', function() {
+        expect(applet.booleanMethod()).to.be(false);
+      });
+      it('should support char return values', function() {
+        expect(applet.charMethod()).to.be('A');
+      });
+      it('should support byte return values', function() {
+        expect(applet.byteMethod()).to.be(42);
+      });
+      it('should support short return values', function() {
+        expect(applet.shortMethod()).to.be(32767);
+      });
+      it('should support int return values', function() {
+        expect(applet.intMethod()).to.be(199916295);
+      });
+      it('should support long return values', function() {
+        expect(applet.longMethod()).to.be(956397711296);
+      });
+      it('should support float return values', function() {
+        expect(applet.floatMethod()).to.be(7.12345);
+      });
+      it('should support double return values', function() {
+        expect(applet.doubleMethod()).to.be(98.76543321);
+      });
+      it('should support string return values', function() {
+        expect(applet.stringMethod()).to.be("Congrats! 0");
+      });
+    });
+
+    describe("Objects", function() {
+      it('should support object return values', function() {
+        expect(applet.objectMethod()).to.be.ok();
+      });
+      describe("Object methods", function() {
+        it('should support javascript access to public methods', function() {
+          expect(function() { applet.objectMethod().canAccess() }).to.not.throwException();
+        });
+        it('should support boolean return values', function() {
+          expect(applet.objectMethod().booleanMethod()).to.be(true);
+        });
+        it('should support char return values', function() {
+          expect(applet.objectMethod().charMethod()).to.be('B');
+        });
+        it('should support byte return values', function() {
+          expect(applet.objectMethod().byteMethod()).to.be(43);
+        });
+        it('should support short return values', function() {
+          expect(applet.objectMethod().shortMethod()).to.be(32766);
+        });
+        it('should support int return values', function() {
+          expect(applet.objectMethod().intMethod()).to.be(199916296);
+        });
+        it('should support long return values', function() {
+          expect(applet.objectMethod().longMethod()).to.be(956397711297);
+        });
+        it('should support float return values', function() {
+          expect(applet.objectMethod().floatMethod()).to.be(8.12345);
+        });
+        it('should support double return values', function() {
+          expect(applet.objectMethod().doubleMethod()).to.be(99.76543321);
+        });
+        it('should support string return values', function() {
+          expect(applet.objectMethod().stringMethod()).to.be("Congrats! 1");
+        });
+      });
+    });
+
+    describe('Collections', function() {
+      describe('Arrays', function() {
+        it('should support array return values', function() {
+          expect(applet.objectArrayMethod()).to.be.ok();
+        });
+        it('should support interacting with array return values', function() {
+          expect(applet.objectArrayMethod().length).to.be(3);
+        });
+        it('should support getting a value from the array', function() {
+          expect(applet.objectArrayMethod()[2]).to.be.ok();
+        });
+        describe("Object methods", function() {
+          it('should support javascript access to public methods', function() {
+            expect(function() { applet.objectArrayMethod()[2].canAccess() }).to.not.throwException();
+          });
+          it('should support boolean return values', function() {
+            expect(applet.objectArrayMethod()[2].booleanMethod()).to.be(false);
+          });
+          it('should support char return values', function() {
+            expect(applet.objectArrayMethod()[2].charMethod()).to.be('E');
+          });
+          it('should support byte return values', function() {
+            expect(applet.objectArrayMethod()[2].byteMethod()).to.be(46);
+          });
+          it('should support short return values', function() {
+            expect(applet.objectArrayMethod()[2].shortMethod()).to.be(32763);
+          });
+          it('should support int return values', function() {
+            expect(applet.objectArrayMethod()[2].intMethod()).to.be(199916299);
+          });
+          it('should support long return values', function() {
+            expect(applet.objectArrayMethod()[2].longMethod()).to.be(956397711300);
+          });
+          it('should support float return values', function() {
+            expect(applet.objectArrayMethod()[2].floatMethod()).to.be(11.12345);
+          });
+          it('should support double return values', function() {
+            expect(applet.objectArrayMethod()[2].doubleMethod()).to.be(102.76543321);
+          });
+          it('should support string return values', function() {
+            expect(applet.objectArrayMethod()[2].stringMethod()).to.be("Congrats! 4");
+          });
+        });
+      });
+      describe('ArrayLists', function() {
+        it('should support ArrayList return values', function() {
+          expect(applet.arrayListMethod()).to.be.ok();
+        });
+        it('should support interacting with ArrayList return values', function() {
+          expect(applet.arrayListMethod().size()).to.be(4);
+        });
+        it('should support getting a value from the ArrayList', function() {
+          expect(applet.arrayListMethod().get(1)).to.be.ok();
+        });
+        describe("Object methods", function() {
+          it('should support javascript access to public methods', function() {
+            expect(function() { applet.arrayListMethod().get(1).canAccess() }).to.not.throwException();
+          });
+          it('should support boolean return values', function() {
+            expect(applet.arrayListMethod().get(1).booleanMethod()).to.be(false);
+          });
+          it('should support char return values', function() {
+            expect(applet.arrayListMethod().get(1).charMethod()).to.be('A');
+          });
+          it('should support byte return values', function() {
+            expect(applet.arrayListMethod().get(1).byteMethod()).to.be(48);
+          });
+          it('should support short return values', function() {
+            expect(applet.arrayListMethod().get(1).shortMethod()).to.be(32761);
+          });
+          it('should support int return values', function() {
+            expect(applet.arrayListMethod().get(1).intMethod()).to.be(199916301);
+          });
+          it('should support long return values', function() {
+            expect(applet.arrayListMethod().get(1).longMethod()).to.be(956397711302);
+          });
+          it('should support float return values', function() {
+            expect(applet.arrayListMethod().get(1).floatMethod()).to.be(13.12345);
+          });
+          it('should support double return values', function() {
+            expect(applet.arrayListMethod().get(1).doubleMethod()).to.be(104.76543321);
+          });
+          it('should support string return values', function() {
+            expect(applet.arrayListMethod().get(1).stringMethod()).to.be("Congrats! 6");
+          });
+        });
+      });
+    });
+  });
+
+
+</script>

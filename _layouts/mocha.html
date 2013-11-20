@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" media="screen" href="{{site.baseurl}}/stylesheets/styles.css" type="text/css" />
+    <link rel="stylesheet" href="{{site.baseurl}}/stylesheets/mocha.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{{site.baseurl}}/lib/expect.js"></script>
+    <script src="{{site.baseurl}}/lib/mocha.js"></script>
+  </head>
+  <body>
+    <div class="top">
+      <header>
+        <div class="sitename"><a href ="{{site.baseurl}}/">Applet Tests</a></div>
+        <a href="https://github.com/{{site.github_repo}}/blob/gh-pages/{{page.path}}" class="view-source">View page on GitHub</a>
+      </header>
+    </div>
+
+    <script>mocha.setup('bdd')</script>
+    <div id="content">
+      {% if page.title != "Applet Tests" %}
+        <h1>{{ page.title }}</h1>
+      {% endif %}
+      {{ content }}
+      <div id="mocha"></div>
+    </div>
+    <script>
+      setTimeout(function() {
+        mocha.checkLeaks();
+        mocha.globals(['jQuery']);
+        mocha.run();
+      }, 1000);
+    </script>
+  </body>
+</html>
