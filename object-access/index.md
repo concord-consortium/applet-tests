@@ -13,11 +13,11 @@ calls and interacts with various return types from an applet and gives informati
 
 <div>
 <div id='gist-it-xdomainjs' style='width: 34em; float: left; margin-left: 10px'>
-<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/object-access/test.html?slice=28:50">
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/object-access/test.html?slice=13:">
 </script>
 </div>
 <div id='gist-it-appletjs' style='width: 24em; float: left; margin-left: 10px'>
-<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/object-access/applets/ObjectAccessTest.java?slice=7:">
+<script src="http://gist-it.appspot.com/github/{{ site.github_repo }}/blob/gh-pages/object-access/applets/ObjectAccessTest.java?slice=6:">
 </script>
 </div>
 </div>
